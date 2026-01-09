@@ -1,0 +1,45 @@
+# IDE and editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+error_log.txt
+logs/
+npm-debug.log*
+
+# Dependency directories
+vendor/
+node_modules/
+
+# Composer files
+composer.lock
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build files
+dist/
+build/
+*.zip
+*.tar.gz
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# PHP specific
+composer.phar 

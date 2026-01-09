@@ -1,0 +1,38 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Set default index file
+DirectoryIndex index.php
+
+# Handle 404 errors
+ErrorDocument 404 /index.php
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# PHP settings
+<IfModule mod_php7.c>
+    php_flag display_errors On
+    php_flag log_errors On
+    php_value error_log error_log.txt
+</IfModule>
+
+# Prevent access to sensitive files
+<Files "*.log">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.sql">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files> 
