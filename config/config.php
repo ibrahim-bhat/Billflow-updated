@@ -32,9 +32,9 @@ if ($is_kichlooandco) {
 } elseif ($is_evotec) {
     // Evotec database settings (Production)
     define('DB_SERVER', '127.0.0.1');
-    define('DB_USERNAME', 'u210720206_billfow');
-    define('DB_PASSWORD', 'Billflow123@');
-    define('DB_NAME', 'u210720206_billfow');
+    define('DB_USERNAME', 'billflow');
+    define('DB_PASSWORD', 'Evotec123@');
+    define('DB_NAME', 'billflow');
 } else {
     // Local development database settings
     define('DB_SERVER', 'localhost');
