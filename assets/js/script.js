@@ -1,4 +1,5 @@
 // Common JavaScript functions
+console.log('%c script.js LOADED!', 'background: blue; color: white; padding: 5px; font-size: 14px;');
 
 /**
  * Mobile Sidebar Toggle
@@ -8,14 +9,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.querySelector('.sidebar');
     const body = document.body;
     
+    
     // Create overlay element for mobile
     if (!document.querySelector('.sidebar-overlay')) {
         const overlay = document.createElement('div');
         overlay.className = 'sidebar-overlay';
         body.appendChild(overlay);
+        console.log('Overlay created');
         
         // Close sidebar when clicking overlay
         overlay.addEventListener('click', function() {
+            console.log('Overlay clicked - closing sidebar');
             sidebar.classList.remove('show');
             overlay.classList.remove('show');
             body.style.overflow = '';
@@ -25,12 +29,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const overlay = document.querySelector('.sidebar-overlay');
     
     // Toggle sidebar on mobile
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', function() {
+    if (sidebarToggle && sidebar) {
+        sidebarToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Toggle clicked!');
+            console.log('Sidebar classes before:', sidebar.className);
             sidebar.classList.toggle('show');
             overlay.classList.toggle('show');
+            console.log('Sidebar classes after:', sidebar.className);
+            console.log('Sidebar computed style:', window.getComputedStyle(sidebar).transform);
+            console.log('Sidebar z-index:', window.getComputedStyle(sidebar).zIndex);
             body.style.overflow = sidebar.classList.contains('show') ? 'hidden' : '';
         });
+    } else {
+        console.error('Missing elements:', {sidebarToggle, sidebar});
     }
     
     // Close sidebar when clicking a link on mobile
@@ -53,6 +65,22 @@ document.addEventListener('DOMContentLoaded', function() {
             body.style.overflow = '';
         }
     });
+    
+    // Menu dots dropdown
+    const menuDots = document.querySelector('.menu-dots');
+    if (menuDots) {
+        menuDots.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            if (menuDots) {
+                menuDots.classList.remove('active');
+            }
+        });
+    }
 });
 
 // Format currency
@@ -164,42 +192,4 @@ $(document).ready(function() {
             loadItems($(this), vendorId);
         });
     });
-});
-
-// Hamburger menu toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const navbarToggler = document.querySelector('.navbar-toggler');
-    const sidebar = document.querySelector('.sidebar');
-    
-    if (navbarToggler && sidebar) {
-        navbarToggler.addEventListener('click', function() {
-            sidebar.classList.toggle('show');
-        });
-        
-        // Close sidebar when clicking outside
-        document.addEventListener('click', function(event) {
-            const isClickInsideSidebar = sidebar.contains(event.target);
-            const isClickOnToggler = navbarToggler.contains(event.target);
-            
-            if (!isClickInsideSidebar && !isClickOnToggler && sidebar.classList.contains('show')) {
-                sidebar.classList.remove('show');
-            }
-        });
-    }
-    
-    // Menu dots dropdown
-    const menuDots = document.querySelector('.menu-dots');
-    if (menuDots) {
-        menuDots.addEventListener('click', function(e) {
-            e.stopPropagation();
-            this.classList.toggle('active');
-        });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function() {
-            if (menuDots) {
-                menuDots.classList.remove('active');
-            }
-        });
-    }
 }); 
