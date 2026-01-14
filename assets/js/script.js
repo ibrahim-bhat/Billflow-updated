@@ -1,5 +1,4 @@
 // Common JavaScript functions
-console.log('%c script.js LOADED!', 'background: blue; color: white; padding: 5px; font-size: 14px;');
 
 /**
  * Mobile Sidebar Toggle
@@ -9,17 +8,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.querySelector('.sidebar');
     const body = document.body;
     
+    if (!sidebarToggle || !sidebar) return;
     
     // Create overlay element for mobile
     if (!document.querySelector('.sidebar-overlay')) {
         const overlay = document.createElement('div');
         overlay.className = 'sidebar-overlay';
         body.appendChild(overlay);
-        console.log('Overlay created');
         
         // Close sidebar when clicking overlay
         overlay.addEventListener('click', function() {
-            console.log('Overlay clicked - closing sidebar');
             sidebar.classList.remove('show');
             overlay.classList.remove('show');
             body.style.overflow = '';
@@ -29,21 +27,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const overlay = document.querySelector('.sidebar-overlay');
     
     // Toggle sidebar on mobile
-    if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('Toggle clicked!');
-            console.log('Sidebar classes before:', sidebar.className);
-            sidebar.classList.toggle('show');
-            overlay.classList.toggle('show');
-            console.log('Sidebar classes after:', sidebar.className);
-            console.log('Sidebar computed style:', window.getComputedStyle(sidebar).transform);
-            console.log('Sidebar z-index:', window.getComputedStyle(sidebar).zIndex);
-            body.style.overflow = sidebar.classList.contains('show') ? 'hidden' : '';
-        });
-    } else {
-        console.error('Missing elements:', {sidebarToggle, sidebar});
-    }
+    sidebarToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+        body.style.overflow = sidebar.classList.contains('show') ? 'hidden' : '';
+    });
     
     // Close sidebar when clicking a link on mobile
     const navLinks = document.querySelectorAll('.sidebar .nav-link');
