@@ -10,8 +10,8 @@ $is_adilwaseementerprises = (strpos($server_name, 'adilwaseementerprises.com') !
                             strpos($http_host, 'adilwaseementerprises.com') !== false ||
                             strpos($server_name, 'www.adilwaseementerprises.com') !== false ||
                             strpos($http_host, 'www.adilwaseementerprises.com') !== false);
-$is_evotec = (strpos($server_name, 'billflow.evotec.in') !== false || 
-              strpos($http_host, 'billflow.evotec.in') !== false);
+$is_evotec = (strpos($server_name, 'billsflow.evotec.in') !== false || 
+              strpos($http_host, 'billsflow.evotec.in') !== false);
 
 // For debugging - you can temporarily force local environment
 // $is_kichlooandco = false;
