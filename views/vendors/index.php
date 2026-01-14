@@ -2,6 +2,7 @@
 // Include session configuration
 require_once __DIR__ . '/../../config/session_config.php';
 require_once __DIR__ . '/../../config/config.php';
+require_once __DIR__ . '/../../core/helpers/feature_helper.php';
 require_once __DIR__ . '/../layout/header.php';
 
 // Check if user is logged in
@@ -9,6 +10,10 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
     exit();
 }
+
+// Check if category column should be shown
+$show_category = show_category_column();
+$features = get_feature_settings();
 
 // Check database connection
 if (!isset($conn) || $conn->connect_error) {
@@ -375,6 +380,7 @@ if (isset($_SESSION['error_message'])) {
                             </button>
                         </div>
                     </th>
+                    <?php if ($show_category): ?>
                     <th>
                         <div class="d-flex align-items-center">
                             <span>Category</span>
@@ -383,6 +389,7 @@ if (isset($_SESSION['error_message'])) {
                             </button>
                         </div>
                     </th>
+                    <?php endif; ?>
                     <th>Balance</th>
                     <th class="actions-column">Actions</th>
                 </tr>
@@ -393,7 +400,9 @@ if (isset($_SESSION['error_message'])) {
                         <tr>
                             <td><?php echo htmlspecialchars($vendor['name']); ?></td>
                             <td><?php echo htmlspecialchars($vendor['type']); ?></td>
+                            <?php if ($show_category): ?>
                             <td><?php echo htmlspecialchars($vendor['vendor_category'] ?? 'Local'); ?></td>
+                            <?php endif; ?>
                             <td>₹<?php 
     $balance = $vendor['balance'];
     $decimal_part = $balance - floor($balance);
@@ -524,13 +533,19 @@ if (isset($_SESSION['error_message'])) {
                             <option value="Outsider">Outsider</option>
                         </select>
                     </div>
-                                         <div class="mb-3">
+                    <?php if ($show_category): ?>
+                    <div class="mb-3">
                          <label for="vendor_category" class="form-label">Category <span class="text-danger">*</span></label>
                          <select class="form-select" id="vendor_category" name="vendor_category" required>
+                             <?php if ($features['commission']): ?>
                              <option value="Commission Based">Commission Based</option>
+                             <?php endif; ?>
+                             <?php if ($features['purchase']): ?>
                              <option value="Purchase Based">Purchase Based</option>
+                             <?php endif; ?>
                         </select>
                     </div>
+                    <?php endif; ?>
                     <div class="mb-3">
                         <label for="balance" class="form-label">Opening Balance</label>
                         <div class="input-group">
@@ -694,13 +709,19 @@ if (isset($_SESSION['error_message'])) {
                             <option value="Outsider">Outsider</option>
                         </select>
                     </div>
-                                         <div class="mb-3">
+                    <?php if ($show_category): ?>
+                    <div class="mb-3">
                          <label for="edit_vendor_category" class="form-label">Category <span class="text-danger">*</span></label>
                          <select class="form-select" id="edit_vendor_category" name="vendor_category" required>
+                             <?php if ($features['commission']): ?>
                              <option value="Commission Based">Commission Based</option>
+                             <?php endif; ?>
+                             <?php if ($features['purchase']): ?>
                              <option value="Purchase Based">Purchase Based</option>
+                             <?php endif; ?>
                         </select>
                     </div>
+                    <?php endif; ?>
                     <div class="mb-3">
                         <label for="edit_balance" class="form-label">Balance</label>
                         <div class="input-group">

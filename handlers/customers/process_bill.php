@@ -3,8 +3,15 @@
 require_once __DIR__ . '/../../config/session_config.php';
 require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../core/helpers/numbering_helper.php';
+require_once __DIR__ . '/../../core/helpers/form_token_helper.php';
 
 if (isset($_POST['create_invoice'])) {
+    // Prevent duplicate form submission
+    if (!checkFormToken()) {
+        $_SESSION['error_message'] = "Invalid form submission. Please try again.";
+        header('Location: ../../views/customers/index.php');
+        exit();
+    }
     $customer_id = sanitizeInput($_POST['customer_id']);
     $vendor_id = sanitizeInput($_POST['vendor_id']);
     $date = sanitizeInput($_POST['date']);

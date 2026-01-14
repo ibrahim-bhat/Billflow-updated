@@ -1,5 +1,10 @@
 <?php
 require_once __DIR__ . '/../../config/config.php';
+require_once __DIR__ . '/../../core/helpers/feature_helper.php';
+
+// Check if commission feature is enabled
+require_feature('commission', '../../views/dashboard/');
+
 require_once __DIR__ . '/../layout/header.php';
 
 // Handle watak deletion

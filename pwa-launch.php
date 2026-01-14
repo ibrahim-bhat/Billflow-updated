@@ -5,7 +5,7 @@ require_once __DIR__ . '/config/config.php';
 
 // Get company settings for PWA
 $company_name = 'BillFlow'; // Default fallback
-$company_logo = 'assets/images/kichlooandco-logo.png'; // Default fallback
+$company_logo = 'assets/images/logo.png'; // Default fallback
 
 try {
     $sql = "SELECT company_name, logo_path FROM company_settings LIMIT 1";

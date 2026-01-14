@@ -11,8 +11,11 @@ if (!isset($_SESSION['user_id'])) {
 // Include config file
 require_once __DIR__ . '/../../config/config.php';
 
+// Include feature helper
+require_once __DIR__ . '/../../core/helpers/feature_helper.php';
+
 // Get company settings for PWA icons
-$company_logo = "assets/images/kichlooandco-logo.png"; // Default fallback
+$company_logo = "assets/images/"; // Default fallback
 $company_name = "BillFlow"; // Default fallback
 try {
     $sql = "SELECT logo_path, company_name FROM company_settings LIMIT 1";
@@ -63,25 +66,18 @@ try {
     <link rel="apple-touch-icon" sizes="76x76" href="<?php echo htmlspecialchars($company_logo); ?>">
     
     <!-- Manifest for PWA -->
-    <?php
-    // Determine the correct path to manifest and assets based on current file location
-    $current_path = $_SERVER['PHP_SELF'];
-    $path_parts = explode('/', trim($current_path, '/'));
-    $depth = count($path_parts) - 2; // Subtract filename and base folder
-    $base_path = $depth > 0 ? str_repeat('../', $depth) : '';
-    ?>
-    <link rel="manifest" href="<?php echo $base_path; ?>manifest-generator.php">
+    <link rel="manifest" href="<?php echo BASE_URL; ?>manifest-generator.php">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Core CSS - Variables, Reset, Base Styles -->
-    <link rel="stylesheet" href="<?php echo $base_path; ?>assets/css/core.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/core.css">
     <!-- Components CSS - Reusable UI Components -->
-    <link rel="stylesheet" href="<?php echo $base_path; ?>assets/css/components.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/components.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?php echo $base_path; ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
     <meta property="og:image" content="<?php echo htmlspecialchars($company_logo); ?>" />
     
     <!-- Service Worker Registration for PWA -->

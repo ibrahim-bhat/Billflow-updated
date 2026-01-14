@@ -367,9 +367,7 @@ foreach ($grouped_items as $group_key => $group) {
                 <?php if (!empty($company['contact_numbers'])): ?>
                     <?php echo nl2br(htmlspecialchars($company['contact_numbers'])); ?>
                 <?php else: ?>
-                    <p>Ali Mohd: 9419067657</p>
-                    <p>Sajad Ali: 7889718295</p>
-                    <p>Umer Ali: 7006342374</p>
+                    <p>Contact: +91 XXXXX XXXXX</p>
                 <?php endif; ?>
             </div>
         </section>

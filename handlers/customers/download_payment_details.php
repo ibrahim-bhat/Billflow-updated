@@ -33,7 +33,7 @@ if (!$customer) {
 
 // Get company settings
 $company_settings = [
-    'company_name' => 'Kichloo And Co',
+    'company_name' => 'BillFlow',
     'company_address' => '',
     'company_phone' => '',
     'company_email' => '',

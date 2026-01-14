@@ -447,9 +447,7 @@ $formatted_date = date('d/m/Y', strtotime($date));
                     <?php if (!empty($company['contact_numbers'])): ?>
                         <?php echo nl2br(htmlspecialchars($company['contact_numbers'])); ?>
                     <?php else: ?>
-                        <p>Ali Mohd: 9419067657</p>
-                        <p>Sajad Ali: 7889718295</p>
-                        <p>Umer Ali: 7006342374</p>
+                        <p>Contact: +91 XXXXX XXXXX</p>
                     <?php endif; ?>
                     <br>
                     <p>Date: <strong><?php echo date('d/m/Y', strtotime($inventory_date ?? $formatted_date)); ?></strong></p>

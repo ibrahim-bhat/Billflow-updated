@@ -609,6 +609,10 @@ document.addEventListener('click', function(e) {
             </div>
             <form method="post" action="index.php" id="invoiceForm">
                 <div class="modal-body">
+                    <?php 
+                    require_once __DIR__ . '/../../core/helpers/form_token_helper.php';
+                    echo getFormTokenField(); 
+                    ?>
                     <input type="hidden" name="customer_id" id="invoice_customer_id">
                     <div class="row mb-3">
                         <div class="col-md-6">
@@ -927,10 +931,11 @@ document.addEventListener('click', function(e) {
         document.getElementById('empty_row').style.display = '';
         
         // Clear any previous items
-        const rows = document.querySelectorAll('#invoice_items_table tbody tr:not(#empty_row)');
-        rows.forEach(row => row.remove());
+        const cards = document.querySelectorAll('#invoice_items_container .invoice-item-card');
+        cards.forEach(card => card.remove());
         
         // Reset total
+        document.getElementById('invoice_subtotal').innerText = '₹0.00';
         document.getElementById('invoice_total').innerText = '₹0.00';
         document.getElementById('total_amount').value = '0';
     });
@@ -984,10 +989,19 @@ function loadVendorItems(vendorId, itemSelect) {
     // Show loading state
     itemSelect.innerHTML = '<option value="">Loading items...</option>';
             
-            // Load items for this vendor via AJAX
-            fetch('../../api/vendors/get_items.php?vendor_id=' + vendorId)
-                .then(response => response.json())
-                .then(data => {
+    // Load items for this vendor via AJAX
+    fetch('../../api/vendors/get_items.php?vendor_id=' + vendorId)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('HTTP error! status: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (!data.success) {
+                throw new Error(data.error || 'Unknown error from API');
+            }
+            
             let optionsHtml = '<option value="">Select Item</option>';
             
             if (data.items && data.items.length > 0) {
@@ -1003,12 +1017,12 @@ function loadVendorItems(vendorId, itemSelect) {
             } else {
                 itemSelect.innerHTML = '<option value="">No items available</option>';
             }
-                })
-                .catch(error => {
-                    console.error('Error loading items:', error);
-            itemSelect.innerHTML = '<option value="">Error loading items</option>';
-                });
-        }
+        })
+        .catch(error => {
+            console.error('Error loading items:', error);
+            itemSelect.innerHTML = '<option value="">Error: ' + error.message + '</option>';
+        });
+}
 
     // Add item row in invoice
     document.getElementById('add_item_button').addEventListener('click', function() {
@@ -1396,7 +1410,7 @@ function loadVendorItems(vendorId, itemSelect) {
 
     // Form validation for invoice submission
     document.getElementById('invoiceForm').addEventListener('submit', function(event) {
-        const items = document.querySelectorAll('#invoice_items_table tbody tr:not(#empty_row)');
+        const items = document.querySelectorAll('#invoice_items_container .invoice-item-card');
         if (items.length === 0) {
             event.preventDefault();
             alert('Please add at least one item to the invoice.');
@@ -1419,13 +1433,16 @@ function loadVendorItems(vendorId, itemSelect) {
         
         if (!itemSelect.value || !vendorSelect.value) {
             isValid = false;
-            event.preventDefault();
-            alert('Please select both a vendor and an item for each row.');
-            return false;
         }
     });
     
-    return isValid;
+    if (!isValid) {
+        event.preventDefault();
+        alert('Please select both a vendor and an item for each row.');
+        return false;
+    }
+    
+    return true;
 });
 
 // Handle custom date checkbox functionality

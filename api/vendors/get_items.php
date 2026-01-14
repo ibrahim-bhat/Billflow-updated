@@ -26,12 +26,12 @@ $sql = "SELECT
         ii.remaining_stock as available_stock,
         ii.id as inventory_item_id,
         (
-            SELECT vbi.rate
+            SELECT vii.rate
             FROM vendor_invoice_items vii
             JOIN vendor_invoices vi ON vii.invoice_id = vi.id
-            WHERE vbi.item_id = i.id AND vb.vendor_id = ?
-            AND DATE(vb.date) = DATE(inv.date_received)
-            ORDER BY vb.date DESC
+            WHERE vii.item_id = i.id AND vi.vendor_id = ?
+            AND DATE(vi.invoice_date) = DATE(inv.date_received)
+            ORDER BY vi.invoice_date DESC
             LIMIT 1
         ) as last_rate
         FROM items i

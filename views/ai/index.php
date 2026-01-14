@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ . '/../../config/session_config.php';
 require_once __DIR__ . '/../../config/config.php';
+require_once __DIR__ . '/../../core/helpers/feature_helper.php';
+
+// Check if AI feature is enabled
+require_feature('ai', '../../views/dashboard/');
 
 $error_message = null;
 

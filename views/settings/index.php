@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ . '/../../config/config.php';
+require_once __DIR__ . '/../../core/helpers/feature_helper.php';
 require_once __DIR__ . '/../layout/header.php';
+
+// Get feature settings
+$features = get_feature_settings();
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -8,73 +12,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->begin_transaction();
         
         if (isset($_POST['update_company'])) {
-            // Handle logo upload
-            $logo_path = $settings['logo_path'] ?? ''; // Keep existing logo if no new one uploaded
-            
-            if (isset($_FILES['company_logo']) && $_FILES['company_logo']['error'] === UPLOAD_ERR_OK) {
-                $upload_dir = 'uploads/logos/';
-                
-                // Create directory if it doesn't exist
-                if (!is_dir($upload_dir)) {
-                    mkdir($upload_dir, 0755, true);
-                }
-                
-                $file_extension = strtolower(pathinfo($_FILES['company_logo']['name'], PATHINFO_EXTENSION));
-                $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
-                
-                if (in_array($file_extension, $allowed_extensions)) {
-                    $new_filename = 'company_logo_' . time() . '.' . $file_extension;
-                    $upload_path = $upload_dir . $new_filename;
-                    
-                    if (move_uploaded_file($_FILES['company_logo']['tmp_name'], $upload_path)) {
-                        // Delete old logo if exists
-                        if (!empty($settings['logo_path']) && file_exists($settings['logo_path'])) {
-                            unlink($settings['logo_path']);
-                        }
-                        $logo_path = $upload_path;
-                    }
-                }
-            }
+            // Logo path remains unchanged (using default logo from assets)
+            $logo_path = $settings['logo_path'] ?? 'assets/images/logo.png';
             
             // Update company settings
-            $sql = "UPDATE company_settings SET 
-                    company_name = ?,
-                    company_address = ?,
-                    company_phone = ?,
-                    company_email = ?,
-                    company_gst = ?,
-                    terms_conditions = ?,
-                    contact_numbers = ?,
-                    business_tagline = ?,
-                    trademark = ?,
-                    bank_account_details = ?,
-                    logo_path = ?,
-                    openai_api_key = ?,
-                    ai_prev_marker = ?,
-                    ai_prev_prev_marker = ?
-                    WHERE id = ?";
-            
-            $stmt = $conn->prepare($sql);
-            $openai_api_key = isset($_POST['openai_api_key']) ? trim($_POST['openai_api_key']) : '';
-            $ai_prev_marker = isset($_POST['ai_prev_marker']) ? trim(strtolower($_POST['ai_prev_marker'])) : 'p';
-            $ai_prev_prev_marker = isset($_POST['ai_prev_prev_marker']) ? trim(strtolower($_POST['ai_prev_prev_marker'])) : 'pp';
-            $stmt->bind_param('ssssssssssssisi',
-                $_POST['company_name'],
-                $_POST['company_address'],
-                $_POST['company_phone'],
-                $_POST['company_email'],
-                $_POST['company_gst'],
-                $_POST['terms_conditions'],
-                $_POST['contact_numbers'],
-                $_POST['business_tagline'],
-                $_POST['trademark'],
-                $_POST['bank_account_details'],
-                $logo_path,
-                $openai_api_key,
-                $ai_prev_marker,
-                $ai_prev_prev_marker,
-                $_POST['settings_id']
-            );
+            // Update AI settings only if AI feature is enabled
+            if ($features['ai']) {
+                $openai_api_key = isset($_POST['openai_api_key']) ? trim($_POST['openai_api_key']) : '';
+                $ai_prev_marker = isset($_POST['ai_prev_marker']) ? trim(strtolower($_POST['ai_prev_marker'])) : 'p';
+                $ai_prev_prev_marker = isset($_POST['ai_prev_prev_marker']) ? trim(strtolower($_POST['ai_prev_prev_marker'])) : 'pp';
+                
+                $sql = "UPDATE company_settings SET 
+                        company_name = ?,
+                        company_address = ?,
+                        company_phone = ?,
+                        company_email = ?,
+                        company_gst = ?,
+                        terms_conditions = ?,
+                        contact_numbers = ?,
+                        business_tagline = ?,
+                        trademark = ?,
+                        bank_account_details = ?,
+                        openai_api_key = ?,
+                        ai_prev_marker = ?,
+                        ai_prev_prev_marker = ?
+                        WHERE id = ?";
+                
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param('sssssssssssisi',
+                    $_POST['company_name'],
+                    $_POST['company_address'],
+                    $_POST['company_phone'],
+                    $_POST['company_email'],
+                    $_POST['company_gst'],
+                    $_POST['terms_conditions'],
+                    $_POST['contact_numbers'],
+                    $_POST['business_tagline'],
+                    $_POST['trademark'],
+                    $_POST['bank_account_details'],
+                    $openai_api_key,
+                    $ai_prev_marker,
+                    $ai_prev_prev_marker,
+                    $_POST['settings_id']
+                );
+            } else {
+                $sql = "UPDATE company_settings SET 
+                        company_name = ?,
+                        company_address = ?,
+                        company_phone = ?,
+                        company_email = ?,
+                        company_gst = ?,
+                        terms_conditions = ?,
+                        contact_numbers = ?,
+                        business_tagline = ?,
+                        trademark = ?,
+                        bank_account_details = ?
+                        WHERE id = ?";
+                
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param('ssssssssssi',
+                    $_POST['company_name'],
+                    $_POST['company_address'],
+                    $_POST['company_phone'],
+                    $_POST['company_email'],
+                    $_POST['company_gst'],
+                    $_POST['terms_conditions'],
+                    $_POST['contact_numbers'],
+                    $_POST['business_tagline'],
+                    $_POST['trademark'],
+                    $_POST['bank_account_details'],
+                    $_POST['settings_id']
+                );
+            }
             $stmt->execute();
             
             $success_message = "Company settings updated successfully";
@@ -196,28 +205,6 @@ $settings = $conn->query($sql)->fetch_assoc();
                             <form method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="settings_id" value="<?php echo $settings['id']; ?>">
                                 
-                                <!-- Logo Upload Section -->
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="company_logo">Company Logo</label>
-                                            <input type="file" class="form-control" id="company_logo" name="company_logo" accept="image/*">
-                                            <small class="form-text text-muted">Allowed formats: JPG, JPEG, PNG, GIF. Max size: 5MB</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <?php if (!empty($settings['logo_path']) && file_exists($settings['logo_path'])): ?>
-                                        <div class="current-logo">
-                                            <label>Current Logo:</label>
-                                            <div class="mt-2">
-                                                <img src="<?php echo htmlspecialchars($settings['logo_path']); ?>" 
-                                                     alt="Company Logo" class="img-thumbnail logo-preview">
-                                            </div>
-                                        </div>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -294,6 +281,7 @@ $settings = $conn->query($sql)->fetch_assoc();
                                     <small class="form-text text-muted">Enter each term on a new line</small>
                                 </div>
 
+                                <?php if ($features['ai']): ?>
                                 <hr>
                                 <h5>AI Settings</h5>
                                 <div class="form-group">
@@ -324,6 +312,7 @@ $settings = $conn->query($sql)->fetch_assoc();
                                         </div>
                                     </div>
                                 </div>
+                                <?php endif; ?>
 
                                 <button type="submit" name="update_company" class="btn btn-primary">
                                     <i class="fas fa-save"></i> Save Company Settings
@@ -335,6 +324,19 @@ $settings = $conn->query($sql)->fetch_assoc();
 
                 <!-- Change Password -->
                 <div class="col-md-4">
+                    <!-- Feature Settings Card -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h3 class="card-title">Feature Settings</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Enable or disable system features like Commission, Purchase, and AI.</p>
+                            <a href="features.php" class="btn btn-primary w-100">
+                                <i class="fas fa-toggle-on"></i> Manage Features
+                            </a>
+                        </div>
+                    </div>
+                    
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Change Password</h3>

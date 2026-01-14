@@ -20,4 +20,3 @@ if (!isset($_SESSION['last_regeneration']) || (time() - $_SESSION['last_regenera
     session_regenerate_id(true);
     $_SESSION['last_regeneration'] = time();
 }
-?> 

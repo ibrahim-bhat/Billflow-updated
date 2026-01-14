@@ -16,7 +16,7 @@ require_once __DIR__ . '/config/config.php';
 
 // Get company settings for logo and company name
 $company_name = "BillFlow"; // Default fallback
-$company_logo = "assets/images/kichlooandco-iconlogo.jpeg"; // Default fallback
+$company_logo = "assets/images/logo.png"; // Default fallback
 try {
     $sql = "SELECT company_name, logo_path FROM company_settings LIMIT 1";
     $result = $conn->query($sql);

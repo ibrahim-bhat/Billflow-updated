@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__ . '/../../config/session_config.php';
 require_once __DIR__ . '/../../config/config.php';
+require_once __DIR__ . '/../../core/helpers/feature_helper.php';
+
+// Check if purchase feature is enabled
+require_feature('purchase', '../../views/dashboard/');
+
 require_once __DIR__ . '/../layout/header.php';
 
 // Check if user is logged in

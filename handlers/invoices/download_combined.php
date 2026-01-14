@@ -15,13 +15,14 @@ ini_set('memory_limit', '512M');
 set_time_limit(120);
 
 // Check if Composer autoload exists
-if (!file_exists('vendor/autoload.php')) {
+$vendorPath = __DIR__ . '/../../vendor/autoload.php';
+if (!file_exists($vendorPath)) {
     die("Dependencies not found (vendor/autoload.php missing). Please run 'composer install' in the project root.");
 }
 
 try {
     require_once __DIR__ . '/../../config/config.php';
-    require_once __DIR__ . '/../../vendor/autoload.php';
+    require_once $vendorPath;
 } catch (Exception $e) {
     die("Error loading dependencies: " . $e->getMessage());
 }

@@ -4,6 +4,9 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
     exit();
 }
+
+// Get feature settings
+$features = get_feature_settings();
 ?>
 <div class="sidebar">
     <div class="brand">
@@ -34,15 +37,25 @@ if (!isset($_SESSION['user_id'])) {
         <a href="../../views/invoices/index.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' && strpos($_SERVER['PHP_SELF'], 'invoices') !== false ? 'active' : ''; ?>">
             <i class="fas fa-file-invoice"></i> Invoices
         </a>
+        
+        <?php if ($features['commission']): ?>
         <a href="../../views/watak/index.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' && strpos($_SERVER['PHP_SELF'], 'watak') !== false ? 'active' : ''; ?>">
             <i class="fas fa-receipt"></i> Watak
         </a>
+        <?php endif; ?>
+        
+        <?php if ($features['purchase']): ?>
         <a href="../../views/vendors/invoices.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'invoices.php' && strpos($_SERVER['PHP_SELF'], 'vendors') !== false ? 'active' : ''; ?>">
             <i class="fas fa-file-invoice"></i> Purchase Invoices
         </a>
+        <?php endif; ?>
+        
+        <?php if ($features['ai']): ?>
         <a href="../../views/ai/index.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' && strpos($_SERVER['PHP_SELF'], 'ai') !== false ? 'active' : ''; ?>">
             <i class="fas fa-brain"></i> AI Invoice Scanner
         </a>
+        <?php endif; ?>
+        
         <a href="../../views/settings/index.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' && strpos($_SERVER['PHP_SELF'], 'settings') !== false ? 'active' : ''; ?>">
             <i class="fas fa-cog"></i> Settings
         </a>

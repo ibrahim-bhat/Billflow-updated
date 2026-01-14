@@ -1816,3 +1816,123 @@
     color: #6c757d;
     font-size: 1rem;
 }
+/* ============================================
+   FEATURE SETTINGS
+   ============================================ */
+
+.feature-item {
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.feature-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.feature-details h4 {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.feature-details p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Toggle Switch */
+.switch-label {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    flex-shrink: 0;
+}
+
+.switch-label input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.switch-slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.switch-label input:checked + .switch-slider {
+    background-color: #4CAF50;
+}
+
+.switch-label input:focus + .switch-slider {
+    box-shadow: 0 0 1px #4CAF50;
+}
+
+.switch-label input:checked + .switch-slider:before {
+    transform: translateX(26px);
+}
+
+/* Info List */
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    line-height: 1.6;
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
+
+.info-list strong {
+    color: #333;
+}
+
+.form-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.mt-3 {
+    margin-top: 20px !important;
+}

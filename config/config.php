@@ -23,24 +23,28 @@ if ($is_kichlooandco) {
     define('DB_USERNAME', 'kichlooandco');
             define('DB_PASSWORD', 'Ibrahimbhat123@@');
     define('DB_NAME', 'kichlooandco');
+    define('BASE_URL', 'https://www.kichlooandco.com/');
 } elseif ($is_adilwaseementerprises) {
     // Adil Waseem Enterprises database settings (Production)
     define('DB_SERVER', '127.0.0.1');
     define('DB_USERNAME', 'adilwaseemenp');
     define('DB_PASSWORD', 'Ibrahimbhat123@@');
     define('DB_NAME', 'adilwaseemenp');
+    define('BASE_URL', 'https://www.adilwaseementerprises.com/');
 } elseif ($is_evotec) {
     // Evotec database settings (Production)
     define('DB_SERVER', '127.0.0.1');
-    define('DB_USERNAME', 'billflow');
+    define('DB_USERNAME', 'billsflow');
     define('DB_PASSWORD', 'Evotec123@');
-    define('DB_NAME', 'billflow');
+    define('DB_NAME', 'billsflow');
+    define('BASE_URL', 'https://billsflow.evotec.in/');
 } else {
     // Local development database settings
     define('DB_SERVER', 'localhost');
     define('DB_USERNAME', 'root');
     define('DB_PASSWORD', '');
     define('DB_NAME', 'kichlooandco');
+    define('BASE_URL', 'http://localhost/Billflow-updated/');
 }
 
 
