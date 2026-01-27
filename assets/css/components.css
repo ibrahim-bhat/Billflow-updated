@@ -1010,8 +1010,9 @@
 .bf-mobile-nav-list {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 100%;
+    width: 100%;
     padding: 0 var(--bf-space-sm);
 }
 
@@ -1170,6 +1171,10 @@
 }
 
 @media (max-width: 768px) {
+    .bf-wrapper {
+        flex-direction: column;
+    }
+
     .bf-sidebar {
         transform: translateX(-100%);
     }
@@ -1180,6 +1185,7 @@
     
     .bf-main {
         margin-left: 0;
+        width: 100%;
         padding: var(--bf-space-md);
         padding-bottom: calc(var(--bf-mobile-nav-height) + var(--bf-space-lg));
     }
@@ -1191,6 +1197,7 @@
     
     .bf-mobile-header {
         display: flex;
+        width: 100%;
     }
     
     .bf-header {

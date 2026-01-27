@@ -153,12 +153,7 @@ try {
             </a>
             <?php endif; ?>
             
-            <a href="../../views/settings/license.php" class="bf-nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'license.php' ? 'active' : ''; ?>">
-                <span class="bf-nav-link-content">
-                    <i class="fas fa-key"></i>
-                    <span>License</span>
-                </span>
-            </a>
+
             <a href="../../views/settings/index.php" class="bf-nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' && strpos($_SERVER['PHP_SELF'], 'settings') !== false ? 'active' : ''; ?>">
                 <span class="bf-nav-link-content">
                     <i class="fas fa-cog"></i>
