@@ -347,97 +347,68 @@ if ($hour >= 5 && $hour < 12) {
     </a>
 </div>
 
-<!-- Mobile Overview Cards -->
-<div class="bf-section-title hidden-desktop">OVERVIEW</div>
-<a href="../customers/index.php" class="bf-overview-card blue">
-    <div class="bf-overview-card-header">
-        <span class="bf-overview-card-title">
-            <i class="fas fa-users"></i> Customers
-        </span>
-        <i class="fas fa-chevron-right bf-overview-card-arrow"></i>
-    </div>
-    <div class="bf-overview-card-value">
-        <?php echo number_format($stats['customers']); ?>
-        <?php if ($stats['invoice_change'] != 0): ?>
-        <span class="bf-overview-card-badge <?php echo $stats['invoice_change'] > 0 ? 'success' : 'danger'; ?>">
-            <?php echo ($stats['invoice_change'] > 0 ? '+' : '') . $stats['invoice_change']; ?>%
-        </span>
-        <?php endif; ?>
-    </div>
-    <div class="bf-overview-card-subtitle">Total active customers</div>
-</a>
-
-<a href="../vendors/index.php" class="bf-overview-card orange">
-    <div class="bf-overview-card-header">
-        <span class="bf-overview-card-title">
-            <i class="fas fa-store"></i> Vendors
-        </span>
-        <i class="fas fa-chevron-right bf-overview-card-arrow"></i>
-    </div>
-    <div class="bf-overview-card-value"><?php echo number_format($stats['vendors']); ?></div>
-    <div class="bf-overview-card-subtitle">Registered suppliers</div>
-</a>
-
-<a href="../inventory/index.php" class="bf-overview-card teal">
-    <div class="bf-overview-card-header">
-        <span class="bf-overview-card-title">
-            <i class="fas fa-boxes"></i> Inventory
-        </span>
-        <i class="fas fa-chevron-right bf-overview-card-arrow"></i>
-    </div>
-    <div class="bf-overview-card-value">
-        <?php echo number_format($stats['inventory']); ?>
-        <?php if ($stats['low_stock_count'] > 0): ?>
-        <span class="bf-overview-card-badge warning">Low Stock: <?php echo $stats['low_stock_count']; ?></span>
-        <?php endif; ?>
-    </div>
-    <div class="bf-overview-card-subtitle">Items in stock</div>
-</a>
-
 <!-- Desktop Stats Cards -->
-<div class="bf-stats-grid hidden-mobile">
-    <!-- Today's Sales Card -->
+<div class="bf-stats-grid">
+    <!-- Today's Sales -->
     <a href="../invoices/index.php" class="bf-stat-card bf-stat-card-orange">
         <div class="bf-stat-card-header">
             <div class="bf-stat-card-icon orange">
                 <i class="fas fa-chart-line"></i>
             </div>
-            <span class="bf-stat-card-label">Today's Sales</span>
+            <div class="bf-stat-card-label">Today's Sales</div>
         </div>
         <div class="bf-stat-card-value">₹<?php echo number_format($stats['todays_invoice']); ?></div>
         <div class="bf-stat-card-subtitle <?php echo $stats['invoice_change'] >= 0 ? 'positive' : 'negative'; ?>">
-            <?php echo ($stats['invoice_change'] >= 0 ? '+' : '') . $stats['invoice_change']; ?>% from yesterday
+            <i class="fas fa-arrow-<?php echo $stats['invoice_change'] >= 0 ? 'up' : 'down'; ?>"></i>
+            <span><?php echo abs($stats['invoice_change']); ?>% from yesterday</span>
         </div>
         <i class="fas fa-chevron-right bf-stat-card-arrow"></i>
     </a>
-    
-    <!-- Total Balance Card -->
+
+    <!-- Total Balance (Receivables) -->
     <a href="../customers/index.php" class="bf-stat-card bf-stat-card-green">
         <div class="bf-stat-card-header">
             <div class="bf-stat-card-icon green">
                 <i class="fas fa-wallet"></i>
             </div>
-            <span class="bf-stat-card-label">Total Balance</span>
+            <div class="bf-stat-card-label">Total Balance</div>
         </div>
         <div class="bf-stat-card-value">₹<?php echo number_format($stats['total_customer_balance']); ?></div>
-        <div class="bf-stat-card-subtitle muted">Updated just now</div>
+        <div class="bf-stat-card-subtitle muted">
+            <span>Total Customer Outstanding</span>
+        </div>
         <i class="fas fa-chevron-right bf-stat-card-arrow"></i>
     </a>
-    
-    <!-- Due Payments Card -->
+
+    <!-- Accounts Receivable -->
     <a href="../customers/index.php" class="bf-stat-card bf-stat-card-red">
         <div class="bf-stat-card-header">
             <div class="bf-stat-card-icon red">
                 <i class="fas fa-exclamation-circle"></i>
             </div>
-            <span class="bf-stat-card-label">Due Payments</span>
+            <div class="bf-stat-card-label">Due Payments</div>
         </div>
         <div class="bf-stat-card-value">₹<?php echo number_format($stats['accounts_receivable']); ?></div>
-        <div class="bf-stat-card-subtitle negative"><?php echo number_format($stats['pending_invoices']); ?> pending invoices</div>
+        <div class="bf-stat-card-subtitle muted">
+            <span>Accounts Receivable</span>
+        </div>
         <i class="fas fa-chevron-right bf-stat-card-arrow"></i>
     </a>
-</div>
 
+    <!-- Todays Total Receivables -->
+    <div class="bf-stat-card bf-stat-card-blue">
+        <div class="bf-stat-card-header">
+            <div class="bf-stat-card-icon blue">
+                <i class="fas fa-money-check-alt"></i>
+            </div>
+            <div class="bf-stat-card-label">Today's Collection</div>
+        </div>
+        <div class="bf-stat-card-value">₹<?php echo number_format($stats['todays_total_receivable']); ?></div>
+        <div class="bf-stat-card-subtitle muted">
+            <span>Cash + Bank Transfers</span>
+        </div>
+    </div>
+</div>
 
 
 <!-- Detailed Statistics Section -->
