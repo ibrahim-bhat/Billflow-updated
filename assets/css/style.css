@@ -1,7 +1,461 @@
-/*
- * BillFlow Custom Styles
- * Page-specific customizations and overrides
- * This file is for any custom styles that don't fit in core.css or components.css
- */
+/* ============================================
+   BillFlow Style CSS - Page Specific Styles
+   ============================================ */
 
-/* Add your custom styles here */
+/* ----------------------------------------
+   Dashboard Specific Styles
+   ---------------------------------------- */
+
+/* Mobile Greeting Section */
+.bf-mobile-greeting {
+    padding: var(--bf-space-md) 0;
+    margin-bottom: var(--bf-space-md);
+}
+
+.bf-mobile-greeting-small {
+    font-size: var(--bf-font-size-base);
+    color: var(--bf-text-muted);
+    margin-bottom: var(--bf-space-xs);
+}
+
+.bf-mobile-greeting-large {
+    font-size: var(--bf-font-size-2xl);
+    font-weight: var(--bf-font-weight-bold);
+    color: var(--bf-text-primary);
+    margin-bottom: var(--bf-space-xs);
+}
+
+.bf-mobile-greeting-date {
+    font-size: var(--bf-font-size-sm);
+    color: var(--bf-text-muted);
+}
+
+.bf-mobile-time {
+    display: flex;
+    align-items: center;
+    gap: var(--bf-space-xs);
+    color: var(--bf-text-muted);
+    font-size: var(--bf-font-size-sm);
+}
+
+/* Section Title */
+.bf-section-title {
+    font-size: var(--bf-font-size-xs);
+    font-weight: var(--bf-font-weight-semibold);
+    color: var(--bf-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--bf-space-md);
+}
+
+/* Dashboard Two Column Layout */
+.bf-dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: var(--bf-space-lg);
+}
+
+/* Stock Alerts Section */
+.bf-stock-alerts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--bf-space-lg);
+}
+
+/* ----------------------------------------
+   Existing Cash Flow Summary Override
+   ---------------------------------------- */
+.bf-cash-flow-card {
+    background-color: var(--bf-bg-card);
+    border-radius: var(--bf-radius-lg);
+    box-shadow: var(--bf-shadow-card);
+    padding: var(--bf-space-lg);
+    margin-bottom: var(--bf-space-lg);
+}
+
+.bf-cash-flow-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--bf-space-md);
+}
+
+.bf-cash-flow-title {
+    font-size: var(--bf-font-size-md);
+    font-weight: var(--bf-font-weight-semibold);
+    color: var(--bf-text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--bf-space-sm);
+}
+
+.bf-cash-flow-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--bf-space-md);
+}
+
+.bf-cash-flow-item {
+    padding: var(--bf-space-md);
+    border-radius: var(--bf-radius-md);
+    border: 1px solid var(--bf-border-light);
+}
+
+.bf-cash-flow-item.collections {
+    border-color: var(--bf-accent-green);
+    border-left-width: 3px;
+}
+
+.bf-cash-flow-item.payments {
+    border-color: var(--bf-accent-red);
+    border-left-width: 3px;
+}
+
+.bf-cash-flow-item-title {
+    font-size: var(--bf-font-size-sm);
+    font-weight: var(--bf-font-weight-medium);
+    display: flex;
+    align-items: center;
+    gap: var(--bf-space-xs);
+    margin-bottom: var(--bf-space-sm);
+}
+
+.bf-cash-flow-item-title.success {
+    color: var(--bf-accent-green);
+}
+
+.bf-cash-flow-item-title.danger {
+    color: var(--bf-accent-red);
+}
+
+.bf-cash-flow-details {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--bf-space-md);
+}
+
+.bf-cash-flow-detail {
+    text-align: center;
+}
+
+.bf-cash-flow-label {
+    font-size: var(--bf-font-size-xs);
+    color: var(--bf-text-muted);
+    margin-bottom: var(--bf-space-xs);
+}
+
+.bf-cash-flow-value {
+    font-size: var(--bf-font-size-base);
+    font-weight: var(--bf-font-weight-semibold);
+    color: var(--bf-text-primary);
+}
+
+.bf-cash-flow-value.success {
+    color: var(--bf-accent-green);
+}
+
+.bf-cash-flow-value.danger {
+    color: var(--bf-accent-red);
+}
+
+/* ----------------------------------------
+   Additional Stats Cards (Desktop)
+   ---------------------------------------- */
+.bf-additional-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--bf-space-lg);
+    margin-top: var(--bf-space-lg);
+}
+
+.bf-additional-stat-card {
+    background-color: var(--bf-bg-card);
+    border-radius: var(--bf-radius-lg);
+    box-shadow: var(--bf-shadow-card);
+    padding: var(--bf-space-lg);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    transition: all var(--bf-transition-fast);
+}
+
+.bf-additional-stat-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+}
+
+.bf-additional-stat-card:hover {
+    box-shadow: var(--bf-shadow-hover);
+    transform: translateY(-2px);
+}
+
+.bf-additional-stat-card.purple::before {
+    background: var(--bf-gradient-purple);
+}
+
+.bf-additional-stat-card.yellow::before {
+    background: var(--bf-gradient-orange);
+}
+
+.bf-additional-stat-card.teal::before {
+    background: var(--bf-gradient-teal);
+}
+
+.bf-additional-stat-header {
+    display: flex;
+    align-items: center;
+    gap: var(--bf-space-sm);
+    margin-bottom: var(--bf-space-sm);
+}
+
+.bf-additional-stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--bf-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--bf-font-size-md);
+}
+
+.bf-additional-stat-icon.purple {
+    background-color: var(--bf-accent-purple-light);
+    color: var(--bf-accent-purple);
+}
+
+.bf-additional-stat-icon.yellow {
+    background-color: var(--bf-accent-yellow-light);
+    color: var(--bf-accent-yellow);
+}
+
+.bf-additional-stat-icon.teal {
+    background-color: var(--bf-accent-teal-light);
+    color: var(--bf-accent-teal);
+}
+
+.bf-additional-stat-label {
+    font-size: var(--bf-font-size-sm);
+    color: var(--bf-text-secondary);
+    font-weight: var(--bf-font-weight-medium);
+}
+
+.bf-additional-stat-value {
+    font-size: var(--bf-font-size-2xl);
+    font-weight: var(--bf-font-weight-bold);
+    color: var(--bf-text-primary);
+    margin-bottom: var(--bf-space-xs);
+}
+
+.bf-additional-stat-subtitle {
+    font-size: var(--bf-font-size-sm);
+    color: var(--bf-text-muted);
+}
+
+.bf-additional-stat-words {
+    font-size: var(--bf-font-size-xs);
+    color: var(--bf-text-muted);
+    font-style: italic;
+    margin-top: var(--bf-space-xs);
+}
+
+/* ----------------------------------------
+   Notification Modal Styles
+   ---------------------------------------- */
+.bf-notification-modal .modal-content {
+    border-radius: var(--bf-radius-lg);
+    border: none;
+}
+
+.bf-notification-modal .modal-header {
+    border-bottom: 1px solid var(--bf-border-light);
+    padding: var(--bf-space-md) var(--bf-space-lg);
+}
+
+.bf-notification-modal .modal-body {
+    padding: var(--bf-space-lg);
+}
+
+/* ----------------------------------------
+   Info Alerts
+   ---------------------------------------- */
+.bf-info-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--bf-space-sm);
+    padding: var(--bf-space-md);
+    background-color: var(--bf-accent-blue-light);
+    border-radius: var(--bf-radius-md);
+    margin-top: var(--bf-space-md);
+}
+
+.bf-info-alert i {
+    color: var(--bf-accent-blue);
+    margin-top: 2px;
+}
+
+.bf-info-alert p {
+    font-size: var(--bf-font-size-sm);
+    color: var(--bf-text-secondary);
+    margin: 0;
+}
+
+.bf-info-alert a {
+    color: var(--bf-primary);
+    font-weight: var(--bf-font-weight-medium);
+}
+
+/* ----------------------------------------
+   Responsive Overrides
+   ---------------------------------------- */
+@media (max-width: 1200px) {
+    .bf-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .bf-additional-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .bf-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .bf-additional-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .bf-cash-flow-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .bf-mobile-greeting {
+        display: block;
+    }
+    
+    /* Show overview cards on mobile */
+    .bf-overview-card {
+        display: block;
+    }
+    
+    /* Show mobile quick actions */
+    .bf-quick-actions-row {
+        display: flex;
+    }
+}
+
+@media (min-width: 769px) {
+    .bf-mobile-greeting {
+        display: none;
+    }
+    
+    .bf-overview-card {
+        display: none;
+    }
+    
+    .bf-quick-actions-row {
+        display: none;
+    }
+}
+
+/* ----------------------------------------
+   Legacy Bootstrap Overrides
+   ---------------------------------------- */
+.card {
+    border-radius: var(--bf-radius-lg);
+    border: none;
+    box-shadow: var(--bf-shadow-card);
+}
+
+.btn-primary {
+    background-color: var(--bf-primary);
+    border-color: var(--bf-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--bf-primary-dark);
+    border-color: var(--bf-primary-dark);
+}
+
+.btn-success {
+    background-color: var(--bf-accent-green);
+    border-color: var(--bf-accent-green);
+}
+
+.btn-danger {
+    background-color: var(--bf-accent-red);
+    border-color: var(--bf-accent-red);
+}
+
+.form-control {
+    border-radius: var(--bf-radius-sm);
+    border-color: var(--bf-border-medium);
+}
+
+.form-control:focus {
+    border-color: var(--bf-primary);
+    box-shadow: 0 0 0 3px var(--bf-primary-light);
+}
+
+.table {
+    border-radius: var(--bf-radius-md);
+    overflow: hidden;
+}
+
+.table th {
+    background-color: var(--bf-bg-tertiary);
+    font-weight: var(--bf-font-weight-semibold);
+    font-size: var(--bf-font-size-sm);
+    color: var(--bf-text-secondary);
+}
+
+.modal-content {
+    border-radius: var(--bf-radius-lg);
+    border: none;
+}
+
+.alert {
+    border-radius: var(--bf-radius-md);
+    border: none;
+}
+
+.alert-info {
+    background-color: var(--bf-accent-blue-light);
+    color: var(--bf-accent-blue);
+}
+
+.alert-success {
+    background-color: var(--bf-accent-green-light);
+    color: var(--bf-accent-green);
+}
+
+.alert-danger {
+    background-color: var(--bf-accent-red-light);
+    color: var(--bf-accent-red);
+}
+
+.alert-warning {
+    background-color: var(--bf-accent-orange-light);
+    color: var(--bf-accent-orange);
+}
+
+/* ----------------------------------------
+   PWA Install Button Override
+   ---------------------------------------- */
+#installButton {
+    background-color: var(--bf-primary) !important;
+    border-radius: var(--bf-radius-full) !important;
+    padding: var(--bf-space-sm) var(--bf-space-lg) !important;
+    font-weight: var(--bf-font-weight-medium) !important;
+    box-shadow: var(--bf-shadow-lg) !important;
+}
+
+#installButton:hover {
+    background-color: var(--bf-primary-dark) !important;
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BillFlow Navigation Menu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3B82F6", // Blue from the dashboard chart bars
+                        "primary-dark": "#2563EB",
+                        "background-light": "#F3F4F6", // Light gray background
+                        "background-dark": "#111827", // Dark gray background
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1F2937",
+                        "text-light": "#1F2937",
+                        "text-dark": "#F9FAFB",
+                        "subtext-light": "#6B7280",
+                        "subtext-dark": "#9CA3AF",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                    }
+                },
+            },
+        };
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }.sidebar-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+            background-color: #CBD5E1;
+            border-radius: 20px;
+        }
+        .dark .sidebar-scroll::-webkit-scrollbar-thumb {
+            background-color: #374151;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark antialiased min-h-screen relative overflow-hidden">
+<div aria-hidden="true" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 transition-opacity opacity-100"></div>
+<aside class="fixed inset-y-0 left-0 z-50 w-72 bg-surface-light dark:bg-surface-dark shadow-xl transform transition-transform duration-300 ease-in-out flex flex-col h-full rounded-r-2xl border-r border-gray-100 dark:border-gray-800">
+<div class="px-6 py-6 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between shrink-0">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+<span class="material-icons-round text-2xl">receipt_long</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">BillFlow</h1>
+<p class="text-xs text-subtext-light dark:text-subtext-dark font-medium">Manage Business</p>
+</div>
+</div>
+<button class="lg:hidden p-2 -mr-2 text-subtext-light dark:text-subtext-dark hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+<span class="material-icons-round">close</span>
+</button>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto sidebar-scroll">
+<div class="mb-2">
+<p class="px-3 text-xs font-semibold text-subtext-light dark:text-subtext-dark uppercase tracking-wider mb-2">Overview</p>
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-300 group transition-colors" href="#">
+<span class="material-icons-round text-xl group-hover:scale-110 transition-transform">dashboard</span>
+                    Dashboard
+                </a>
+</div>
+<div class="mt-6 mb-2">
+<p class="px-3 text-xs font-semibold text-subtext-light dark:text-subtext-dark uppercase tracking-wider mb-2">Management</p>
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white group transition-colors" href="#">
+<span class="material-icons-round text-xl text-subtext-light dark:text-subtext-dark group-hover:text-primary transition-colors">people</span>
+                    Customers
+                    <span class="ml-auto bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 py-0.5 px-2 rounded-full text-xs font-semibold">275</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white group transition-colors" href="#">
+<span class="material-icons-round text-xl text-subtext-light dark:text-subtext-dark group-hover:text-primary transition-colors">storefront</span>
+                    Vendors
+                    <span class="ml-auto bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 py-0.5 px-2 rounded-full text-xs font-semibold">60</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white group transition-colors" href="#">
+<span class="material-icons-round text-xl text-subtext-light dark:text-subtext-dark group-hover:text-primary transition-colors">inventory_2</span>
+                    Inventory
+                </a>
+</div>
+<div class="mt-6 mb-2">
+<p class="px-3 text-xs font-semibold text-subtext-light dark:text-subtext-dark uppercase tracking-wider mb-2">Finance</p>
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white group transition-colors" href="#">
+<span class="material-icons-round text-xl text-subtext-light dark:text-subtext-dark group-hover:text-primary transition-colors">description</span>
+                    Invoices
+                </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white group transition-colors" href="#">
+<span class="material-icons-round text-xl text-subtext-light dark:text-subtext-dark group-hover:text-primary transition-colors">receipt</span>
+                    Purchase Invoices
+                </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white group transition-colors" href="#">
+<span class="material-icons-round text-xl text-subtext-light dark:text-subtext-dark group-hover:text-primary transition-colors">book</span>
+                    Watak
+                </a>
+</div>
+<div class="mt-6 mb-2">
+<p class="px-3 text-xs font-semibold text-subtext-light dark:text-subtext-dark uppercase tracking-wider mb-2">System</p>
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white group transition-colors" href="#">
+<span class="material-icons-round text-xl text-subtext-light dark:text-subtext-dark group-hover:text-primary transition-colors">verified_user</span>
+                    License
+                </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white group transition-colors" href="#">
+<span class="material-icons-round text-xl text-subtext-light dark:text-subtext-dark group-hover:text-primary transition-colors">settings</span>
+                    Settings
+                </a>
+</div>
+</nav>
+<div class="border-t border-gray-100 dark:border-gray-700 p-4 bg-gray-50/50 dark:bg-gray-800/20 shrink-0">
+<div class="flex items-center gap-3 mb-3">
+<img alt="User avatar" class="h-10 w-10 rounded-full object-cover border-2 border-white dark:border-gray-600 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAymXF_CN1eAPVUws1w9NFlUDf6rjBbiUDgbNGtP7T0E0z7nwCD7o1ndfQG2FfqAE2KIUGDCpKhKCPhWvjWEtFeXuJ5xl8QRkrGbCGylaSqf5xaRiy69Ic4QuWGVON7bab_1EwlgYSOlbEaTl8_CLc5IMcIRcWx2fTPNzyhXV2ufzZ9mlAkGq7v5YJC3Vzu5P38Lna6C5UrefTezjHlR_r2QceyJo5p7rtv2M40e2MSHocP0mhVodTqN5AJxUzqZhumJeB7XKA-rvlh"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-gray-900 dark:text-white truncate">Kichloo And Co</p>
+<p class="text-xs text-subtext-light dark:text-subtext-dark truncate">admin@billflow.com</p>
+</div>
+</div>
+<a class="flex items-center justify-center gap-2 w-full px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 rounded-lg transition-colors" href="#">
+<span class="material-icons-round text-sm">logout</span>
+                Sign out
+            </a>
+</div>
+</aside>
+<div class="lg:pl-72 flex flex-col min-h-screen transition-all duration-300 filter blur-[2px] pointer-events-none select-none">
+<header class="sticky top-0 z-20 bg-surface-light dark:bg-surface-dark border-b border-gray-100 dark:border-gray-800 px-4 py-3 flex items-center justify-between shadow-sm">
+<button class="p-2 -ml-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-icons-round">menu</span>
+</button>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full">
+<span class="material-icons-round">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white dark:border-gray-800"></span>
+</button>
+</div>
+</header>
+<main class="flex-1 p-4 space-y-4">
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl shadow-soft border border-gray-100 dark:border-gray-800">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Hi 👋 Kichloo And Co!</h2>
+<p class="text-subtext-light dark:text-subtext-dark text-sm">Welcome back! Here's what's happening.</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-xl shadow-soft border-l-4 border-green-500">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-icons-round text-green-500">people</span>
+<span class="font-medium text-gray-700 dark:text-gray-200">Total Customers</span>
+</div>
+<p class="text-3xl font-bold text-green-600 dark:text-green-400">275</p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-xl shadow-soft border-l-4 border-blue-500">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-icons-round text-blue-500">local_shipping</span>
+<span class="font-medium text-gray-700 dark:text-gray-200">Total Vendors</span>
+</div>
+<p class="text-3xl font-bold text-blue-600 dark:text-blue-400">60</p>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

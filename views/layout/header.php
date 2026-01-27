@@ -68,6 +68,11 @@ try {
     <!-- Manifest for PWA -->
     <link rel="manifest" href="<?php echo BASE_URL; ?>manifest-generator.php">
     
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
@@ -114,28 +119,25 @@ try {
     </script>
 </head>
 <body>
-    <div class="wrapper d-flex">
-        <!-- Mobile menu toggle -->
-        <div class="mobile-toggle">
-            <button class="navbar-toggler" type="button">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
+    <div class="bf-wrapper">
+        <!-- Mobile Header -->
+        <header class="bf-mobile-header">
+            <div class="bf-mobile-header-left">
+                <button class="bf-mobile-menu-btn" onclick="openSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <span class="bf-mobile-logo">BillFlow</span>
+            </div>
+            <div class="bf-mobile-header-right">
+                <button class="bf-header-icon-btn" onclick="openNotificationModal()">
+                    <i class="fas fa-bell"></i>
+                    <span class="bf-header-badge" id="mobile-notification-count">0</span>
+                </button>
+            </div>
+        </header>
+        
         <!-- Sidebar -->
         <?php include 'sidebar.php'; ?>
         
         <!-- Main Content -->
-        <div class="main-content">
-            <div class="page-header">
-                <!-- <div>
-                    <?php if (isset($page_subtitle)): ?>
-                        <p class="text-muted"><?php echo $page_subtitle; ?></p>
-                    <?php endif; ?>
-                </div> -->
-                
-                <?php if (isset($page_action) && !empty($page_action)): ?>
-                    <div>
-                        <?php echo $page_action; ?>
-                    </div>
-                <?php endif; ?>
-            </div> 
+        <main class="bf-main">
